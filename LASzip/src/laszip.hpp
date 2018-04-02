@@ -50,6 +50,8 @@
 #ifndef LASZIP_HPP
 #define LASZIP_HPP
 
+#include "mydefs.hpp"
+
 #if defined(_MSC_VER) && (_MSC_VER < 1300)
 #define LZ_WIN32_VC6
 typedef __int64   SIGNED_INT64;
@@ -95,7 +97,7 @@ public:
   const char* get_name() const;
 };
 
-class LASzip
+class LASLIB_DLL LASzip
 {
 public:
 

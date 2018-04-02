@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)exe\$(Configuration)_$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)compilation\$(ProjectName)\$(Configuration)_$(Platform)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <PostBuildEvent>
+      <Command>echo 
+mkdir "$(SolutionDir)Library\$(ProjectName)"
+xcopy /Y "$(OutDir)laslib.dll" "$(SolutionDir)Library\$(ProjectName)\bin\$(Configuration)_x64\"
+xcopy /Y "$(OutDir)laslib.lib" "$(SolutionDir)Library\$(ProjectName)\lib\$(Configuration)_x64\"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <PostBuildEvent>
+      <Message>Copy Output files to Library\Laslib</Message>
+    </PostBuildEvent>
+    <ClCompile>
+      <PreprocessorDefinitions>COMPILE_AS_DLL;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;WIN32;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>inc;..\laszip\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup />
+</Project>
